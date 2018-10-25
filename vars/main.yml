@@ -49,3 +49,9 @@ passenger_settings:
   'PassengerMaxPoolSize':         12
   'PassengerMaxRequestQueueSize': 2048
   'PassengerMinInstances':        10
+
+#
+# HAMMER
+#
+hammer_settings:
+  request_timeout: -1

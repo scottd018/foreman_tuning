@@ -30,3 +30,8 @@ pulp_conf: '/etc/default/pulp_workers'
 # PASSENGER
 #
 passenger_conf: '/etc/httpd/conf.d/passenger.conf'
+
+#
+# HAMMER
+#
+hammer_conf: '/etc/hammer/cli.modules.d/foreman.yml'

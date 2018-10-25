@@ -47,6 +47,14 @@
         - passenger
         - all
 
+    #
+    # HAMMER
+    #
+    - include_tasks: 'foreman_hammer.yml'
+      tags:
+      - hammer
+      - all
+
 #
 # ENSURE HANDLERS RUN IN CASE WE FAIL
 #

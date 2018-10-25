@@ -38,6 +38,7 @@ Tags are required in order to execute all or parts of the playbook.  The followi
 
 - all: execute and apply all tunables (listed below)
 - dynflow: only apply tunables which affect the Dynflow console
+- hammer: only apply tunables which affect the Hammer client
 - httpd: only apply tunables which affect Apache
 - passenger: only apply tunables which affect Passenger
 - postgresql: only apply tunables which affect PostgreSQL

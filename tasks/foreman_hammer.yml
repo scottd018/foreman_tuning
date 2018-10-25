@@ -1,0 +1,11 @@
+- block:
+  - name: 'HAMMER | increasing hammer timeout'
+    lineinfile:
+      dest:         "{{ hammer_conf }}"
+      line:         ":{{ item.key }}: {{ item.value }}"
+      state:        'present'
+      regexp:       ":{{ item.key }}:[ \t]"
+      backup:       true
+    with_dict: "{{ hammer_settings }}"
+    tags:
+    - always
