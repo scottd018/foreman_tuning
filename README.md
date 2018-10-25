@@ -4,9 +4,9 @@ Tunables are based on https://access.redhat.com/documentation/en-us/red_hat_sate
 - Only tested on Satellite 6.3 currently
 
 # Updating Variables
-All applicable variables are stored in **./vars/main.yml** and should be reviewed before executing this playbook.
+All applicable variables are stored in **./vars/main.yml** and should be reviewed before executing a playbook with this role.
 
-All default variables, which are not likely to change, are stored in **./defaults/main.yml** and should be reviewed before executing this playbook.
+All default variables, which are not likely to change, are stored in **./defaults/main.yml** and should be reviewed before executing a playbook, with this role.
 
 # Sample Inventory
 
