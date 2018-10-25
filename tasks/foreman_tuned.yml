@@ -1,0 +1,25 @@
+- block:
+    - name: 'TUNED | ensure the profile directory exists'
+      file:
+        dest:   "/etc/tuned/{{ foreman_tuned_profile }}"
+        owner:  'root'
+        group:  'root'
+        mode:   0700
+        state:  'directory'
+        backup: true
+      tags:
+        - always
+
+    - name: 'TUNED | create the tuned profile'
+      template:
+        dest:   "/etc/tuned/{{ foreman_tuned_profile }}/tuned.conf"
+        owner:  'root'
+        group:  'root'
+        mode:   0700
+        src:    'foreman_tuned_profile.j2'
+        backup: true
+      notify:
+        - 'restart tuned'
+        - 'apply tuned profile'
+      tags:
+        - always

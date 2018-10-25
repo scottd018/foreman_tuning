@@ -1,0 +1,48 @@
+#
+# TUNED
+#
+- name: 'restart tuned'
+  service:
+    name:  'tuned'
+    state: 'restarted'
+
+- name: 'apply tuned profile'
+  shell: "tuned-adm profile {{ foreman_tuned_profile }}"
+
+#
+# DAEMON LIMITS
+#
+- name: 'reload daemons'
+  shell: 'systemctl daemon-reload'
+
+#
+# HTTPD/PASSENGER
+#
+- name: 'restart httpd'
+  service:
+    name:  'httpd'
+    state: 'restarted'
+
+#
+# POSTGRESQL
+#
+- name: 'restart postgresql'
+  service:
+    name:  'postgresql'
+    state: 'restarted'
+
+#
+# DYNFLOW
+#
+- name: 'restart dynflow'
+  service:
+    name:  'foreman-tasks'
+    state: 'restarted'
+
+#
+# PULP
+#
+- name: 'restart pulp workers'
+  service:
+    name:  'pulp_workers'
+    state: 'restarted'

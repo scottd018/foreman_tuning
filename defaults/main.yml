@@ -1,0 +1,32 @@
+#
+# TUNED
+#
+foreman_tuned_profile: 'foreman'
+
+#
+# HTTPD
+#
+httpd_prefork_conf:    '/etc/httpd/conf.modules.d/prefork.conf'
+httpd_keepalive_conf:  '/etc/httpd/conf.d/05-foreman-ssl.conf'
+httpd_systemd_service: 'httpd.service.d'
+
+#
+# POSTGRESQL
+#
+pgsql_conf: '/var/lib/pgsql/data/postgresql.conf'
+
+#
+# DYNFLOW
+#
+dynflow_conf:            '/etc/sysconfig/foreman-tasks'
+dynflow_systemd_service: 'smart_proxy_dynflow_core.service.d'
+
+#
+# PULP
+#
+pulp_conf: '/etc/default/pulp_workers'
+
+#
+# PASSENGER
+#
+passenger_conf: '/etc/httpd/conf.d/passenger.conf'

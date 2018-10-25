@@ -1,0 +1,14 @@
+[main]
+{% if ansible_virtualization_role == 'guest' -%}
+include=virtual-guest
+{% else -%}
+include=throughput-performance
+{% endif %}
+
+[vm]
+transparent_hugepages=never
+
+[sysctl]
+vm.swappiness={{ foreman_swappiness }}
+fs.aio-max-nr={{ foreman_async_io }}
+

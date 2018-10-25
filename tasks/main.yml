@@ -1,0 +1,55 @@
+- block:
+    #
+    # TUNED
+    #
+    - include_tasks: 'foreman_tuned.yml'
+      tags:
+        - tuned
+        - all
+
+    #
+    #  HTTPD
+    #
+    - include_tasks: 'foreman_httpd.yml'
+      tags:
+        - httpd
+        - all
+
+    #
+    # POSTGRESQL
+    #
+    - include_tasks: 'foreman_postgresql.yml'
+      tags:
+        - postgresql
+        - all
+        
+    #
+    # DYNFLOW
+    #        
+    - include_tasks: 'foreman_dynflow.yml'
+      tags:
+        - dynflow
+        - all
+
+    #
+    # PULP
+    #
+    - include_tasks: 'foreman_pulp.yml'
+      tags:
+        - pulp
+        - all
+
+    #
+    # PASSENGER
+    #
+    - include_tasks: 'foreman_passenger.yml'
+      tags:
+        - passenger
+        - all
+
+#
+# ENSURE HANDLERS RUN IN CASE WE FAIL
+#
+  rescue:
+    - meta: 'flush_handlers'
+

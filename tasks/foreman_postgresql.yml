@@ -1,0 +1,12 @@
+- block:
+    - name: 'POSTGRESQL | configuring postgresql'
+      lineinfile:
+        dest:         "{{ pgsql_conf }}"
+        line:         "{{ item.key }} = {{ item.value }}"
+        state:        'present'
+        regexp:       "^{{ item.key }}"
+        backup:       true
+      with_dict: "{{ pgsql_settings }}"
+      notify:    'restart postgresql'
+      tags:
+        - always

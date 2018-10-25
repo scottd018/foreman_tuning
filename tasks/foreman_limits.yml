@@ -1,0 +1,26 @@
+- block:
+    - name: 'DAEMON LIMITS | ensure daemon directories exist for systemd_service: {{ systemd_service }}'
+      file:
+        dest:   "/etc/systemd/system/{{ systemd_service }}"
+        owner:  'root'
+        group:  'root'
+        mode:   0755
+        state:  'directory'
+        backup: true
+      tags:
+        - always
+
+    - name: 'DAEMON LIMITS | set daemon limits for systemd_service: {{ systemd_service }}'
+      copy:
+        dest:   "/etc/systemd/system/{{ systemd_service }}/limits.conf"
+        owner:  'root'
+        group:  'root'
+        mode:   0644
+        backup: true
+        content: |
+          [Service]
+          LimitNOFILE={{ systemd_limit }}
+      tags:
+        - always
+      notify:
+        - 'reload daemons'

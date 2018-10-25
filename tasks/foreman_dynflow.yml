@@ -1,0 +1,19 @@
+- block:
+    - name: 'DYNFLOW | configuring dynflow'
+      lineinfile:
+        dest:         "{{ dynflow_conf }}"
+        line:         "{{ item.key }}={{ item.value }}"
+        state:        'present'
+        regexp:       "^{{ item.key }}"
+        backup:       true
+      with_dict: "{{ dynflow_settings }}"
+      notify:    'restart dynflow'
+      tags:
+        - always
+
+    - include_tasks: 'foreman_limits.yml'
+      vars:
+        systemd_service: "{{ dynflow_systemd_service }}"
+        systemd_limit:   "{{ dynflow_systemd_limit }}"
+      tags:
+        - always

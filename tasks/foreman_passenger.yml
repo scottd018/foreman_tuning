@@ -1,0 +1,29 @@
+- block:
+    - name: 'PASSENGER | configuring passenger'
+      lineinfile:
+        dest:         "{{ passenger_conf }}"
+        line:         "  {{ item.key }} {{ item.value }}"
+        state:        'present'
+        insertbefore: '</IfModule>'
+        regexp:       "[ \t]{{ item.key }}[ \t]"
+        backup:       true
+      with_dict: "{{ passenger_settings }}"
+      notify:    'restart httpd'
+      tags:
+        - always
+
+    #
+    # NOTE: we do this so that we can keep our passenger settings in one file
+    #
+    - name: 'PASSENGER | comment passenger settings'
+      lineinfile:
+        dest:         '/etc/httpd/conf.d/05-foreman-ssl.conf'
+        line:         "  #{{ item.key }} {{ item.value }}"
+        state:        'present'
+        insertbefore: '</VirtualHost>'
+        regexp:       "[# \t]{{ item.key }}[ \t]"
+        backup:       true
+      with_dict: "{{ passenger_settings }}"
+      notify:    'restart httpd'
+      tags:
+        - always

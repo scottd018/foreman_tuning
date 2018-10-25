@@ -1,0 +1,51 @@
+#
+# TUNED
+#
+foreman_async_io:      60000
+foreman_swappiness:    1
+
+#
+# HTTPD
+#
+httpd_systemd_limit:   64000
+httpd_prefork_settings:
+  'StartServers': 12
+  'ServerLimit':  2048
+
+httpd_keepalive_settings:
+  'KeepAlive':            'On'
+  'KeepAliveTimeout':     5
+  'MaxKeepAliveRequests': 0
+
+#
+# POSTGRESQL
+#
+pgsql_settings:
+  max_connections:              500
+  shared_buffers:               2GB
+  work_mem:                     8MB
+  checkpoint_segments:          32
+  checkpoint_completion_target: 0.9
+
+#
+# DYNFLOW
+#
+dynflow_systemd_limit:   64000
+dynflow_settings:
+  EXECUTOR_MEMORY_LIMIT:            3GB
+  EXECUTOR_MEMORY_MONITOR_DELAY:    3600
+  EXECUTOR_MEMORY_MONITOR_INTERVAL: 120
+
+#
+# PULP
+#
+pulp_settings:
+  PULP_CONCURRENCY: 4
+
+#
+# PASSENGER
+#
+passenger_settings:
+  'PassengerMaxPoolSize':         12
+  'PassengerMaxRequestQueueSize': 2048
+  'PassengerMinInstances':        10

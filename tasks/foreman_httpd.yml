@@ -1,0 +1,33 @@
+- block:
+    - name: 'HTTPD | setting apache prefork limits'
+      lineinfile:
+        dest:         "{{ httpd_prefork_conf }}"
+        line:         "  {{ item.key }} {{ item.value }}"
+        state:        'present'
+        insertbefore: '</IfModule>'
+        regexp:       "[ \t]{{ item.key }}[ \t]"
+        backup:       true
+      with_dict: "{{ httpd_prefork_settings }}"
+      notify:    'restart httpd'
+      tags:
+        - always
+
+    - name: 'HTTPD | setting apache keepalive'
+      lineinfile:
+        dest:         "{{ httpd_keepalive_conf }}"
+        line:         "  {{ item.key }} {{ item.value }}"
+        state:        'present'
+        insertbefore: '</VirtualHost>'
+        regexp:       "[ \t]{{ item.key }}[ \t]"
+        backup:       true
+      with_dict: "{{ httpd_keepalive_settings }}"
+      notify:    'restart httpd'
+      tags:
+        - always
+
+    - include_tasks: 'foreman_limits.yml'
+      vars:
+        systemd_service: "{{ httpd_systemd_service }}"
+        systemd_limit:   "{{ httpd_systemd_limit }}"
+      tags:
+        - always
